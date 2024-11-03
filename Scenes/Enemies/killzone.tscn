@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bibh74iycnhte"]
+
+[ext_resource type="Script" path="res://scripts/killzone.gd" id="1_ccshy"]
+[ext_resource type="AudioStream" uid="uid://c0vfxkcllgjxc" path="res://Scenes/Sounds/Watersplash.ogg" id="2_vcc1t"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4vmoq"]
+
+[node name="Killzone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_ccshy")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_4vmoq")
+
+[node name="Watersplash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vcc1t")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
